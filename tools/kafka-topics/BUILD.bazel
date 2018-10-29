@@ -1,0 +1,16 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "go_default_library",
+    srcs = ["kafka-topics.go"],
+    importmap = "github.com/zenreach/platypus/vendor/github.com/db7/kazoo-go/tools/kafka-topics",
+    importpath = "github.com/db7/kazoo-go/tools/kafka-topics",
+    visibility = ["//visibility:private"],
+    deps = ["//vendor/github.com/wvanbergen/kazoo-go:go_default_library"],
+)
+
+go_binary(
+    name = "kafka-topics",
+    embed = [":go_default_library"],
+    visibility = ["//visibility:public"],
+)
